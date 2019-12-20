@@ -26,6 +26,7 @@ body{
     height: 95vh;
     background-position:top;
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0% 100%);
     position: relative;
 
 }
@@ -38,11 +39,19 @@ body{
 .logo{
     height: 35px;
 }
+.heroarea-text{
+    position: absolute;
+    top:40%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
 .hero-text{
-  position: absolute;
-  top:40%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  backface-visibility: hidden;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+
 
 }
 .hero-text-main{
@@ -50,14 +59,108 @@ body{
   font-size: 40px;
   font-weight: 400px;
   letter-spacing: 35px;
-  color: #ffffff;
-  text-transform: uppercase;
+  animation-name: textLeft;
+  animation-duration: .5s;
+  animation-timing-function: ease-out;
+
 }
 .hero-text-sub{
     display: block;
     font-size: 20px;
     font-weight: 700px;
     letter-spacing: 12px;
-    color: #ffffff;
+    animation-name: textRight;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes textLeft{
+    0%{
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    80%{
+        opacity: 1;
+        transform:translateX(10px);
+    }
+    100%{
+opacity: 1;
+transform:translateX(0px);
+    }
+}
+
+@keyframes textRight{
+    0%{
+      opacity: 1;
+      transform: translateX(100px);
+    }
+    80%{
+        opacity: 1;
+        transform:translateX(-10px);
+    }
+    100%{
+opacity: 0;
+transform:translateX(0px) ;
+    }
+}
+@keyframes textBottom{
+    0%{
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100%{
+opacity: 1;
+transform:translateX(0px) ;
+    }
+}
+
+.btn:link,
+.btn:visited{
+
     text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: relative;
+    animation-name: textBottom ;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    animation-delay: .75s;
+animation-fill-mode: backwards;
+}
+.btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 20px rgba(0,0,0,.2);
+}
+.btn:active{
+ transform: translateY(-1px);
+ box-shadow: 0px 5px 10px rgba(0,0,0,.2);
+}
+.btn-white{
+    color: #777;
+    background: #fff;
+}
+
+.btn::after{
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    z-index:-1;
+    transition: all .4s; 
+}
+.btn-white::after{
+    background-color: #fff;
+}
+
+.btn:hover::after{
+    transform: scale(1.5);
+    opacity:0;
+    
 }
